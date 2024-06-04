@@ -198,43 +198,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
 
-                // Update Pie Chart
-                // const pieChartCtx = document.getElementById('pie-chart').getContext('2d');
-                // if (window.pieChart) {
-                //     window.pieChart.destroy();
-                // }
-                // window.pieChart = new Chart(pieChartCtx, {
-                //     type: 'pie',
-                //     data: {
-                //         labels: filteredData.map(item => `Borough ${item.BOROUGH}`),
-                //         datasets: [{
-                //             label: 'Borough Distribution',
-                //             data: filteredData.map(item => item.SALE_PRICE),
-                //             backgroundColor: [
-                //                 'rgba(255, 99, 132, 0.2)',
-                //                 'rgba(54, 162, 235, 0.2)',
-                //                 'rgba(255, 206, 86, 0.2)',
-                //                 'rgba(75, 192, 192, 0.2)',
-                //                 'rgba(153, 102, 255, 0.2)'
-                //             ],
-                //             borderColor: [
-                //                 'rgba(255, 99, 132, 1)',
-                //                 'rgba(54, 162, 235, 1)',
-                //                 'rgba(255, 206, 86, 1)',
-                //                 'rgba(75, 192, 192, 1)',
-                //                 'rgba(153, 102, 255, 1)'
-                //             ],
-                //             borderWidth: 1
-                //         }]
-                //     },
-                //     options: {
-                //         scales: {
-                //             y: {
-                //                 beginAtZero: true
-                //             }
-                //         }
-                //     }
-                // });
+                
                 const boroughCounts = filteredData.reduce((acc, curr) => {
                     const borough = curr.BOROUGH;
                     if (!acc[borough]) {
@@ -368,7 +332,7 @@ $(document).ready(function() {
 
     function renderTable(data, page = 1) {
         const tableBody = $('#data-table tbody');
-        //
+        
         
         
         tableBody.empty();
@@ -414,9 +378,16 @@ $(document).ready(function() {
 
     $.getJSON('dataset.json', function(response) {
         data = response;
-        filteredData = data.map(item => ({
+        filteredData = data.map(item => ({ //ini untuk menampilkan data yang ingin muncul di dalam table
+            
+            BOROUGH:item.BOROUGH,
+            NEIGHBORHOOD:item.NEIGHBORHOOD,
+            BUILDING_CLASS_CATEGORY:item.BUILDING_CLASS_CATEGORY,
+            TOTAL_UNITS:item.TOTAL_UNITS,
+            YEAR_BUILT:item.YEAR_BUILT,
+            TAX_CLASS_AT_TIME_OF_SALE:item.TAX_CLASS_AT_TIME_OF_SALE,
             SALE_PRICE:item.SALE_PRICE,
-            BOROUGH:item.BOROUGH
+            SALE_DATE:item.SALE_DATE
         }))
         
         renderTable(filteredData, currentPage);
