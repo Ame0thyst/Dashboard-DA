@@ -73,17 +73,19 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
+  color: black; /* Table text color */
+  background-color: #ffffffd5;
 }
 
 th,
 td {
-  border: 1px solid #d577e7;
+  border: 1px solid #000000;
   padding: 8px;
   text-align: left;
 }
 
 th {
-  background-color: #3a3a3a;
+  background-color: #ffffff;
 }
 
 #pagination {
