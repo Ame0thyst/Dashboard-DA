@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
     const teamMembers = [
-      { name: "Gilang Wiko Wicaksono", roles: ["team leader", "Front End"], imageUrl: "./assets/anggota/iko.JPG", link: "#" },
-      { name: "Silvia Putri Anggreani", roles: ["Front End"], imageUrl: "./assets/anggota/silvia_01.jpeg", link: "#" },
+      { name: "Gilang Wiko Wicaksono", roles: ["team leader", "Front End"], imageUrl: "./assets/anggota/iko.webp", link: "#" },
+      { name: "Silvia Putri Anggreani", roles: ["Front End"], imageUrl: "./assets/anggota/silvia_01.webp", link: "#" },
       { name: "Bro Rinal sepuh", roles: ["Front End"], imageUrl: "./assets/anggota/Rinaldi.webp", link: "#" },
-      { name: "Riska", roles: ["Front End"], imageUrl: "./assets/anggota/Riskamawarni_Laia.jpg", link: "#" },
+      { name: "Riska", roles: ["Front End"], imageUrl: "./assets/anggota/Riskamawarni_Laia.webp", link: "#" },
       // { name: "hantu", roles: ["⭐"], imageUrl: "./assets/anggota/huahaha.jpg", link: "#" },
-      { name: "Fajar", roles: ["deployment"], imageUrl: "./assets/anggota/fajar.jpg", link: "#" },
-      { name: "Arum", roles: ["deployment"], imageUrl: "./assets/anggota/rum.jpg", link: "#" },
+      { name: "Fajar", roles: ["deployment"], imageUrl: "./assets/anggota/fajar.webp", link: "#" },
+      { name: "Arum", roles: ["deployment"], imageUrl: "./assets/anggota/rum.webp", link: "#" },
       { name: "Lilis Surwangi", roles: ["Pitch Deck"], imageUrl: "./assets/anggota/Lilis_Surwangi.webp", link: "#" },
       { name: "Ririn", roles: ["Pitch Deck"], imageUrl: "./assets/anggota/Ririn_cute.webp", link: "#" },
       { name: "Syifa Aulia Zahra", roles: ["Pitch Deck"], imageUrl: "./assets/anggota/Syifa_Auliya_Zahra.webp", link: "#" },
