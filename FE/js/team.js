@@ -1,23 +1,23 @@
 document.addEventListener("DOMContentLoaded", function() {
   const teamMembers = [
-    { name: "Gilang Wiko Wicaksono", role: "team leader", imageUrl: "../../assets/anggota/Gilang.webp", link: "john_profile.html" },
-    { name: "Silvia Putri Anggreani", role: "Front End", imageUrl: "../../assets/anggota/silvia_01.jpeg", link: "john_profile.html" },
-    { name: "Bro Rinal sepuh", role: "Front End", imageUrl: "../../assets/anggota/Rinaldi.webp", link: "john_profile.html" },
-    { name: "Riska", role: "Front End", imageUrl: "../../assets/anggota/Riskamawarni_Laia.webp", link: "john_profile.html" },
-    { name: "Mamang Hitler", role: "Front End", imageUrl: "../../assets/anggota/adolf.webp", link: "john_profile.html" },
-    { name: "Fajar", role: "deployment", imageUrl: "../../assets/anggota/fajar.webp", link: "john_profile.html" },
-    { name: "Mamang Hitler", role: "deployment", imageUrl: "../../assets/anggota/adolf.webp", link: "john_profile.html" },
-    { name: "Lilis Surwangi", role: "Pitch Deck", imageUrl: "../../assets/anggota/Lilis_Surwangi.webp", link: "john_profile.html" },
-    { name: "Ririn", role: "Pitch Deck", imageUrl: "../../assets/anggota/Ririn_cute.webp", link: "john_profile.html" },
-    { name: "Syifa Aulia Zahra", role: "Pitch Deck", imageUrl: "../../assets/anggota/Syifa_Auliya_Zahra.webp", link: "john_profile.html" },
-    { name: "Dyah Ayu Pitaloka", role: "Pitch Deck", imageUrl: "/assets/anggota/dyah.webp", link: "john_profile.html" },
-    { name: "Putri Nadia N", role: "Pitch Deck", imageUrl: "../../assets/anggota/Putri_Nadia_N.webp", link: "john_profile.html" },
-    { name: "Dziahulhaj Fadhil", role: "Pitch Deck", imageUrl: "../../assets/anggota/Dziaulhaj.webp", link: "john_profile.html" },
+    { name: "Gilang Wiko Wicaksono", role: "team leader", imageUrl: "/assets/anggota/iko.JPG", link: "#" },
+    { name: "Silvia Putri Anggreani", role: "Front End", imageUrl: "/assets/anggota/silvia_01.jpeg", link: "#" },
+    { name: "Bro Rinal sepuh", role: "Front End", imageUrl: "/assets/anggota/Rinaldi.webp", link: "#" },
+    { name: "Riska", role: "Front End", imageUrl: "/assets/anggota/Riskamawarni_Laia.jpg", link: "#" },
+    { name: "hantu", role: "⭐", imageUrl: "/assets/anggota/huahaha.jpg", link: "#" },
+    { name: "Fajar", role: "deployment", imageUrl: "/assets/anggota/fajar.jpg", link: "#" },
+    { name: "Arum", role: "deployment", imageUrl: "/assets/anggota/rum.jpg", link: "#" },
+    { name: "Lilis Surwangi", role: "Pitch Deck", imageUrl: "/assets/anggota/Lilis_Surwangi.webp", link: "#" },
+    { name: "Ririn", role: "Pitch Deck", imageUrl: "/assets/anggota/Ririn_cute.webp", link: "#" },
+    { name: "Syifa Aulia Zahra", role: "Pitch Deck", imageUrl: "/assets/anggota/Syifa_Auliya_Zahra.webp", link: "#" },
+    { name: "Dyah Ayu Pitaloka", role: "Pitch Deck", imageUrl: "/assets/anggota/dyah.webp", link: "#" },
+    { name: "Putri Nadia N", role: "Pitch Deck", imageUrl: "/assets/anggota/Putri_Nadia_N.webp", link: "#" },
+    { name: "Dziahulhaj Fadhil", role: "Pitch Deck", imageUrl: "/assets/anggota/Dziaulhaj.webp", link: "#" },
     // Tambahkan data anggota tim lainnya sesuai kebutuhan
   ];
   const specialMembers = [
-      { name: "Kak Aul", role: "Mentor SE", imageUrl: "../../assets/anggota/kak_aul.webp", link: "special1_profile.html" },
-      { name: "Kak inaa", role: "Mentor DA", imageUrl: "../../assets/anggota/kak_ina.webp", link: "special2_profile.html" }
+      { name: "Kak Aul", role: "Mentor SE", imageUrl: "/assets/anggota/kak_aul.webp", link: "#" },
+      { name: "Kak inaa", role: "Mentor DA", imageUrl: "/assets/anggota/kak_ina.webp", link: "#" }
     ];
     
 

@@ -11,6 +11,22 @@ body {
   justify-content: space-between;
   margin-bottom: 20px;
 }
+
+.headerSec {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  background-color: #8f9092;
+  background-image: url("/assets/anggota/silvia_01.jpeg");
+  padding: 5px;
+  border-radius: 8px;
+  flex-grow: 1;
+}
+.pic {
+  max-width: 100%;
+  max-height: 80px;
+}
+
 .filter,
 .score-card {
   background-color: #3a3a3a;
@@ -30,6 +46,51 @@ body {
   color: #f0f0f0;
   margin-top: 5px;
 }
+
+/* button style */
+#btn-filter {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.custom-btn {
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+.btn-filter {
+  border: none;
+  color: #000;
+}
+
+.btn-filter:hover {
+  color: #f7f7f7;
+  background-color: #80b8f5;
+  box-shadow: -7px -7px 60px 0px rgba(109, 163, 243, 0.6),
+    -4px -4px 5px 0px rgba(231, 105, 105, 0.4),
+    7px 7px 20px 0px rgba(40, 230, 135, 0.133),
+    4px 4px 5px 0px rgba(204, 18, 18, 0.167);
+  transition: all 0.7s ease;
+}
+.btn-filter:hover:after {
+  left: auto;
+  right: 0;
+  width: 100%;
+}
+.btn-filter:active {
+  top: 3px;
+}
+
 .score-card {
   display: flex;
   justify-content: space-between;
@@ -47,9 +108,17 @@ body {
   border-radius: 8px;
   margin-top: 20px;
   flex-grow: 1;
+  max-width: 50%;
 }
 canvas {
   background-color: #3a3a3a;
+}
+#salesReport {
+  max-width: 100%;
+}
+.salesReport {
+  max-width: 100%;
+  max-height: 350px;
 }
 
 #pie-chart {
@@ -58,7 +127,7 @@ canvas {
 }
 
 .container-2 {
-  max-width: 1200px;
+  max-width: 100%;
 }
 
 #search {
@@ -73,7 +142,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
-  color: black; /* Table text color */
+  color: #3a3a3a; /* Table text color */
   background-color: #ffffffd5;
 }
 
@@ -86,6 +155,7 @@ td {
 
 th {
   background-color: #ffffff;
+  text-align: center;
 }
 
 #pagination {

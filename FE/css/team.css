@@ -70,7 +70,7 @@
 .team-card:hover {
   transform: scale(1.09);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
-  filter: brightness(120%);
+  filter: brightness(90%);
   background-color: #007bff; /* Warna biru saat dihover */
 }
 
@@ -184,6 +184,10 @@
 .deployment {
   background-color: rgb(70, 223, 223);
   color: white;
+}
+.⭐ {
+  color: rgb(228, 241, 106);
+  background-color: #1f1f1f;
 }
 
 img {

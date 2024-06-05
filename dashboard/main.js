@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             data: data,
                             borderColor: 'rgba(255, 99, 132, 1)',
                             backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            
                         }]
                     },
                     options: {
@@ -92,6 +93,53 @@ document.addEventListener('DOMContentLoaded', function () {
                 
 
                 // Update Vertical Bar Chart
+                // const barChartVerticalCtx = document.getElementById('bar-chart-vertical').getContext('2d');
+                // if (window.barChartVertical) {
+                //     window.barChartVertical.destroy();
+                // }
+                // window.barChartVertical = new Chart(barChartVerticalCtx, {
+                //     type: 'bar',
+                //     data: {
+                //         labels: filteredData.map(item => item.BOROUGH),
+                //         datasets: [{
+                //             label: 'Borough by Sale Price',
+                //             data: filteredData.map(item => item.SALE_PRICE),
+                //             backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                //             borderColor: 'rgba(54, 162, 235, 1)',
+                //             borderWidth: 1
+                //         }]
+                //     },
+                //     options: {
+                //         scales: {
+                //             y: {
+                //                 beginAtZero: true
+                //             }
+                //         }
+                //     }
+                // });
+
+                //vertical chart setelah optimasi
+                const boroughGroupedData = filteredData.reduce((acc, item) => {
+                    const borough = item.BOROUGH;
+                    if (!acc[borough]) {
+                        acc[borough] = {
+                            BOROUGH: borough,
+                            TOTAL_SALE_PRICE: 0
+                        };
+                    }
+                    acc[borough].TOTAL_SALE_PRICE += parseInt(item.SALE_PRICE, 10);
+                    return acc;
+                }, {});
+
+                // Mengonversi objek menjadi array, kemudian mengurutkan dan memilih 5 borough dengan SALE_PRICE tertinggi
+                const sortedBoroughData = Object.values(boroughGroupedData)
+                    .sort((a, b) => b.TOTAL_SALE_PRICE - a.TOTAL_SALE_PRICE)
+                    .slice(0, 5);
+
+                const boroughLabelsVertical = sortedBoroughData.map(item => item.BOROUGH);
+                const boroughDataVertical = sortedBoroughData.map(item => item.TOTAL_SALE_PRICE);
+
+                // Update Vertical Bar Chart
                 const barChartVerticalCtx = document.getElementById('bar-chart-vertical').getContext('2d');
                 if (window.barChartVertical) {
                     window.barChartVertical.destroy();
@@ -99,10 +147,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 window.barChartVertical = new Chart(barChartVerticalCtx, {
                     type: 'bar',
                     data: {
-                        labels: filteredData.map(item => item.BOROUGH),
+                        labels: boroughLabelsVertical,
                         datasets: [{
-                            label: 'Borough by Sale Price',
-                            data: filteredData.map(item => item.SALE_PRICE),
+                            label: 'Top 5 Boroughs by Sale Price',
+                            data: boroughDataVertical,
                             backgroundColor: 'rgba(54, 162, 235, 0.2)',
                             borderColor: 'rgba(54, 162, 235, 1)',
                             borderWidth: 1
@@ -116,6 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     }
                 });
+                
 
                 // Update Horizontal Bar Chart
                 const barChartHorizontalCtx = document.getElementById('bar-chart-horizontal').getContext('2d');
@@ -213,6 +262,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   
                   const total = boroughData.reduce((a, b) => a + b, 0);
                   
+                  //pie chart
                   const pieChartData = {
                     labels: boroughLabels,
                     datasets: [{
@@ -403,27 +453,3 @@ $(document).ready(function() {
     });
 });
 
-
-// $(document).ready(function () {
-//     $("#data-table").DataTable({
-//       responsive: true,
-//       ajax: {
-//         url: "./dataset.json",
-//         dataSrc: "",
-//       },
-//       columns: [
-//         { data: "BOROUGH" },
-//         { data: "NEIGHBORHOOD" },
-//         // { data: "building_class_category" },
-//         // { data: "address" },
-//         // { data: "residential_units" },
-//         // { data: "commercial_units" },
-//         // { data: "total_units" },
-//         // { data: "year_build" },
-//         // { data: "tax_class" },
-//         // { data: "building_class" },
-//         // { data: "sale_price" },
-//         // { data: "sale_date" },
-//       ],
-//     });
-//   });

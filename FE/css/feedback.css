@@ -3,6 +3,7 @@
 #feedback {
   padding: 50px 0; /* Tambahkan padding agar tidak bertabrakan dengan section di atasnya */
   background: linear-gradient(to left, #080c0f, #33353a);
+  width: 100%;
 }
 
 .name-fieldset {
