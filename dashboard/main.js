@@ -155,16 +155,30 @@ document.addEventListener('DOMContentLoaded', function () {
                             borderColor: 'rgba(54, 162, 235, 1)',
                             borderWidth: 1
                         }]
-                    },
+                    }, 
+                    /* styling warna axis */
                     options: {
                         scales: {
                             y: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                ticks:{
+                                    color:'#fff',
+                                    beginAtZero: true
+
+                                }
+                            },
+                            x: {
+                            beginAtZero: true,
+                                ticks:{
+                                    color:'#fff',
+                                    beginAtZero: true
+
+                                }
                             }
                         }
                     }
                 });
-                
+
 
                 // Update Horizontal Bar Chart
                 const barChartHorizontalCtx = document.getElementById('bar-chart-horizontal').getContext('2d');
@@ -334,13 +348,15 @@ document.addEventListener('DOMContentLoaded', function () {
                         scales: {
                             y: {
                                 beginAtZero: true
+                               
                             }
                         }
                     }
                 });
 
                 // Update Score Cards
-                document.getElementById('total-revenue').innerText = `$${filteredData.reduce((acc, item) => acc + parseInt(item.SALE_PRICE), 0)}`;
+                // document.getElementById('total-revenue').innerText = `$${filteredData.reduce((acc, item) => acc + parseInt(item.SALE_PRICE), 0)}`;
+                document.getElementById('total-revenue').innerText = `${filteredData.reduce((acc, item) => acc + parseInt(item.SALE_PRICE), 0).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}`;
                 document.getElementById('total-block').innerText = filteredData.length;
                 document.getElementById('order-volume').innerText = filteredData.reduce((acc, item) => acc + parseInt(item.TOTAL_UNITS), 0);
             }
@@ -440,13 +456,25 @@ $(document).ready(function() {
             SALE_DATE:item.SALE_DATE
         }))
         
+
         renderTable(filteredData, currentPage);
         renderPagination(filteredData.length, rowsPerPage);
     });
 
     $('#search').on('input', function() {
         const searchTerm = $(this).val();
-        filteredData = filterData(searchTerm);
+        
+        filteredData = filterData(searchTerm).map(item => ({ //ini untuk menampilkan data yang ingin muncul di dalam table
+            
+            BOROUGH:item.BOROUGH,
+            NEIGHBORHOOD:item.NEIGHBORHOOD,
+            BUILDING_CLASS_CATEGORY:item.BUILDING_CLASS_CATEGORY,
+            TOTAL_UNITS:item.TOTAL_UNITS,
+            YEAR_BUILT:item.YEAR_BUILT,
+            TAX_CLASS_AT_TIME_OF_SALE:item.TAX_CLASS_AT_TIME_OF_SALE,
+            SALE_PRICE:item.SALE_PRICE,
+            SALE_DATE:item.SALE_DATE
+        }));
         currentPage = 1;
         renderTable(filteredData, currentPage);
         renderPagination(filteredData.length, rowsPerPage);
