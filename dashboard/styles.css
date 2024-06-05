@@ -110,6 +110,14 @@ body {
   flex-grow: 1;
   max-width: 50%;
 }
+
+.score-card-logo {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
+}
+
 canvas {
   background-color: #3a3a3a;
 }
