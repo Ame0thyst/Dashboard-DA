@@ -20,7 +20,7 @@ h1 {
 /* Navigation */
 .nav-main {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   position: fixed;
   top: 0;
@@ -40,8 +40,9 @@ h1 {
 #menu {
   display: flex;
   list-style: none;
-  margin: 0;
+  margin-right: 10px;
   padding: 0;
+  font-weight: bolder;
 }
 
 #menu li {
