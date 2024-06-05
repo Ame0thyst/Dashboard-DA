@@ -88,9 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     }
                 });
-                
-                
-                
+
 
                 // Update Vertical Bar Chart
                 // const barChartVerticalCtx = document.getElementById('bar-chart-vertical').getContext('2d');
@@ -156,8 +154,17 @@ document.addEventListener('DOMContentLoaded', function () {
                             borderWidth: 1
                         }]
                     }, 
-                    /* styling warna axis */
+                    /* styling warna judul chart */
+                    
                     options: {
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#fff'
+                                }
+                            }
+                        },
+                        /* styling warna axis */
                         scales: {
                             y: {
                                 beginAtZero: true,
