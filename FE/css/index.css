@@ -186,8 +186,9 @@ footer {
   align-items: flex-start;
   justify-content: space-between;
 }
+
 .col {
-  flex-basis: 25%;
+  flex-basis: 100%; /* Membuat satu col per baris */
   padding: 5px;
   display: flex;
   flex-direction: column;
@@ -293,5 +294,11 @@ footer .copyright {
   }
   100% {
     left: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col {
+    flex-basis: 30%; /* Mengatur tata letak kolom kembali ke tiga per baris pada layar yang cukup lebar */
   }
 }
