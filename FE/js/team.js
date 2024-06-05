@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
       { name: "Silvia Putri Anggreani", roles: ["Front End"], imageUrl: "./assets/anggota/silvia_01.jpeg", link: "#" },
       { name: "Bro Rinal sepuh", roles: ["Front End"], imageUrl: "./assets/anggota/Rinaldi.webp", link: "#" },
       { name: "Riska", roles: ["Front End"], imageUrl: "./assets/anggota/Riskamawarni_Laia.jpg", link: "#" },
-      { name: "hantu", roles: ["⭐"], imageUrl: "./assets/anggota/huahaha.jpg", link: "#" },
+      // { name: "hantu", roles: ["⭐"], imageUrl: "./assets/anggota/huahaha.jpg", link: "#" },
       { name: "Fajar", roles: ["deployment"], imageUrl: "./assets/anggota/fajar.jpg", link: "#" },
       { name: "Arum", roles: ["deployment"], imageUrl: "./assets/anggota/rum.jpg", link: "#" },
       { name: "Lilis Surwangi", roles: ["Pitch Deck"], imageUrl: "./assets/anggota/Lilis_Surwangi.webp", link: "#" },

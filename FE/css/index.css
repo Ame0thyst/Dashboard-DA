@@ -6,7 +6,9 @@
 body {
   font-family: "Poppins", sans-serif;
   scroll-behavior: smooth;
-  background: linear-gradient(to left, #080c0f, #33353a);
+  background: linear-gradient(to left, #33353a, #e0e2e7);
+  /* background: linear-gradient(to left, #080c0f, #33353a); */
+
   margin-bottom: 3px;
   padding: 0;
   width: 100%;
@@ -23,7 +25,7 @@ h1 {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: rgba(156, 148, 148, 0.5); /* Ganti sesuai kebutuhan */
+  background-color: rgba(107, 172, 247, 0.5); /* Ganti sesuai kebutuhan */
   z-index: 1000; /* Pastikan z-index nya lebih tinggi dari elemen lain jika diperlukan */
   padding: 10px 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Efek bayangan untuk memberi kesan mengambang */
@@ -113,7 +115,8 @@ section {
 /* Footer */
 footer {
   width: 97, 8%;
-  background: linear-gradient(to left, #5ba8e2, #b87333);
+  /* background: linear-gradient(to left, #5ba8e2, #2c92d5); */
+  background-color: rgba(107, 172, 247, 0.5);
   color: #fff;
   padding: 1rem;
   margin-bottom: 3px;
@@ -139,26 +142,10 @@ footer {
 
 #branch {
   margin-top: 5%;
-  flex-direction: row;
-  place-items: center;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
 }
 
-.col:nth-child(2),
-.col:nth-child(3) {
-  flex-basis: 15%;
-}
 .footer_logo {
   width: 90px;
-  position: relative;
-  top: -23px;
-  left: -20px;
-  margin: 0 10px;
-  max-height: 100px;
-  display: inline-block;
-  vertical-align: middle;
 }
 .footer_about {
   position: relative;
@@ -168,18 +155,12 @@ footer {
 footer .row p {
   text-align: left;
 }
-.col img {
-  text-align: center;
-}
+
 .col h3 {
   width: fit-content;
   margin-bottom: 40px;
   position: relative;
   text-align: center;
-}
-.col h3,
-.col p {
-  vertical-align: middle;
 }
 
 .footer_email {
@@ -197,47 +178,24 @@ footer .row p {
   text-decoration: none;
   color: #fff;
 }
-.col form {
-  padding-bottom: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #f66335;
-  margin-bottom: 50px;
-}
-.col form .icon {
-  font-size: 18px;
-  margin-right: 10px;
-}
-.col form input {
-  width: 100%;
-  background: transparent;
-  color: #ccc;
-  border: 0;
-  outline: none;
-}
-.col form button {
-  background: transparent;
-  border: 0;
-  outline: none;
-  cursor: pointer;
-}
-.col form button .icon_right {
-  font-size: 16px;
-  color: #ccc;
-}
+
 .col .social_icons .social_icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 40px;
-  font-size: 20px;
+  line-height: 20px;
+  font-size: 10px;
   color: #fff;
-  background: #f66335;
-  margin-right: 15px;
   padding: 5px;
   cursor: pointer;
+}
+.social_icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+  gap: 10px;
+}
+.social_icons img {
+  max-height: 50px;
+  max-width: 50px;
 }
 
 .thanks-logo {
@@ -283,4 +241,3 @@ footer .copyright {
     left: 100%;
   }
 }
-/* testing parallax */
