@@ -41,8 +41,8 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
-  flex: 1 1 calc(33.333% - 2rem); /* biar tiap tiap card ada jarak nya*/
-  max-width: calc(33.333% - 2rem); /* hai */
+  flex: 1 1 calc(33.333% - 2rem);
+  max-width: calc(33.333% - 2rem);
 }
 
 #about .card-inner {
@@ -166,4 +166,16 @@
   direction: ltr;
   -webkit-font-feature-settings: "liga";
   -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 768px) {
+  #about .content-about p {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  #about .card {
+    flex-basis: 100%; /* Mengatur setiap card memiliki basis flex 100% */
+    max-width: 100%; /* Membuat setiap card memiliki lebar maksimum 100% */
+  }
 }
