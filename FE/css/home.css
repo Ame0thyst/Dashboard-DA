@@ -59,17 +59,6 @@
   background-color: #2c92d5;
 }
 
-@keyframes revealImage {
-  0% {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    filter: blur(20px);
-  }
-  100% {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    filter: blur(0);
-  }
-}
-
 .home::before {
   content: "";
   position: absolute;
@@ -97,4 +86,22 @@
 .home-content {
   position: relative;
   z-index: 2;
+}
+@media (max-width: 768px) {
+  .home {
+    height: auto; /* Mengubah tinggi menjadi otomatis */
+    padding: 50px 20px; /* Menambahkan padding pada layar kecil */
+    text-align: center; /* Mengatur penataan teks menjadi tengah */
+  }
+
+  .home-content {
+    max-width: 100%; /* Mengubah lebar maksimum menjadi 100% */
+    margin: 0 auto; /* Mengatur margin menjadi auto untuk penempatan tengah */
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
 }

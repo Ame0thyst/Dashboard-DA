@@ -33,6 +33,21 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
+
+  //responsife paragraf home
+  document.addEventListener('DOMContentLoaded', () => {
+    const paragraph = document.querySelector('.home-content p');
+  
+    // Fungsi untuk menampilkan teks penuh pada klik
+    function expandText() {
+      paragraph.style.webkitLineClamp = 'initial'; // Menghapus batasan jumlah baris
+      paragraph.removeEventListener('click', expandText); // Menghapus event listener agar tidak terus berulang
+    }
+  
+    // Event listener untuk memanggil fungsi saat teks di klik
+    paragraph.addEventListener('click', expandText);
+  });
+  
   
 document.addEventListener('DOMContentLoaded', () => {
   const button = document.getElementById('button-home');
