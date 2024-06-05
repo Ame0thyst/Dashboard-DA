@@ -20,7 +20,7 @@ h1 {
 /* Navigation */
 .nav-main {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   position: fixed;
   top: 0;
@@ -105,7 +105,61 @@ nav li a:hover:before {
 nav li a:hover:after {
   background: transparent;
   width: 100%;
-  /* transition: 0s; */
+}
+.burger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.burger div {
+  width: 25px; /* ini untuk panjang garis burger menu*/
+  height: 3px; /* ini untuk lebar garis burger menu*/
+  background-color: rgb(239, 239, 240);
+  margin: 4px;
+  transition: all 0.3s ease;
+  margin-right: 30px;
+}
+
+@media (max-width: 768px) {
+  #menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: rgba(128, 130, 131, 0.8);
+    z-index: 999;
+    text-align: left;
+    backdrop-filter: blur(10px); /* Menambahkan efek blur untuk efek kaca */
+  }
+
+  #menu li {
+    margin: 10px 0;
+  }
+
+  .burger {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+  }
+
+  .burger.active div:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+
+  .burger.active div:nth-child(2) {
+    opacity: 0;
+  }
+
+  .burger.active div:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+
+  #menu.active {
+    display: flex;
+  }
 }
 
 /* Sections */

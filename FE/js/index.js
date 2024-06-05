@@ -15,7 +15,24 @@
         });
     });
 });
+//untuk burger menu
+document.addEventListener('DOMContentLoaded', () => {
+    const burger = document.querySelector('.burger');
+    const menu = document.querySelector('#menu');
 
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      menu.classList.toggle('active');
+    });
+
+    // Optional: menu otomatis tertutup setelah di klik
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('active');
+        menu.classList.remove('active');
+      });
+    });
+  });
   
 document.addEventListener('DOMContentLoaded', () => {
   const button = document.getElementById('button-home');
