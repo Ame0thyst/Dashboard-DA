@@ -91,30 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
                 // Update Vertical Bar Chart
-                // const barChartVerticalCtx = document.getElementById('bar-chart-vertical').getContext('2d');
-                // if (window.barChartVertical) {
-                //     window.barChartVertical.destroy();
-                // }
-                // window.barChartVertical = new Chart(barChartVerticalCtx, {
-                //     type: 'bar',
-                //     data: {
-                //         labels: filteredData.map(item => item.BOROUGH),
-                //         datasets: [{
-                //             label: 'Borough by Sale Price',
-                //             data: filteredData.map(item => item.SALE_PRICE),
-                //             backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                //             borderColor: 'rgba(54, 162, 235, 1)',
-                //             borderWidth: 1
-                //         }]
-                //     },
-                //     options: {
-                //         scales: {
-                //             y: {
-                //                 beginAtZero: true
-                //             }
-                //         }
-                //     }
-                // });
+                
 
                 //vertical chart setelah optimasi
                 const boroughGroupedData = filteredData.reduce((acc, item) => {
