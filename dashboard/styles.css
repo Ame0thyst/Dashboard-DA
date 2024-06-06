@@ -17,7 +17,7 @@ body {
   display: flex;
   align-items: center;
   background-color: #8f9092;
-  background-image: url("/assets/anggota/silvia_01.jpeg");
+  background-image: url("/assets/anggota/silvia_01.webp");
   padding: 5px;
   border-radius: 8px;
   flex-grow: 1;
@@ -186,4 +186,29 @@ th {
 
 .pagination-button:hover:not(.active) {
   background-color: #d577e7;
+}
+
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column; /* Mengubah orientasi flex menjadi vertikal */
+  }
+  .chart-container {
+    max-width: 100%; /* Menyesuaikan lebar chart container agar penuh pada layar kecil */
+    margin-bottom: 20px; /* Memberikan jarak antar chart pada layar kecil */
+  }
+}
+@media (max-width: 768px) {
+  /* Mengatur tata letak tabel menjadi blok sehingga dapat di-scroll */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap; /* Menghindari pembungkus teks */
+  }
+
+  /* Mengatur lebar kolom tabel agar tetap sesuai dengan konten */
+  th,
+  td {
+    min-width: 100px; /* Mengatur lebar minimal kolom */
+    max-width: none; /* Menghapus batasan lebar maksimal */
+  }
 }
