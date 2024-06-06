@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
     const teamMembers = [
-      { name: "Gilang Wiko Wicaksono", roles: ["team leader", "Front End"], imageUrl: "./assets/anggota/iko.webp", link: "#" },
+      { name: "Gilang Wiko ", roles: ["team leader", "Front End"], imageUrl: "./assets/anggota/iko.webp", link: "#" },
       { name: "Silvia Putri Anggreani", roles: ["Front End"], imageUrl: "./assets/anggota/silvia_01.webp", link: "#" },
-      { name: "Bro Rinal sepuh", roles: ["Front End"], imageUrl: "./assets/anggota/Rinaldi.webp", link: "#" },
+      { name: "Rinaldi", roles: ["Front End"], imageUrl: "./assets/anggota/Rinaldi.webp", link: "#" },
       { name: "Riska", roles: ["Front End"], imageUrl: "./assets/anggota/Riskamawarni_Laia.webp", link: "#" },
       // { name: "hantu", roles: ["⭐"], imageUrl: "./assets/anggota/huahaha.jpg", link: "#" },
       { name: "Fajar", roles: ["deployment"], imageUrl: "./assets/anggota/fajar.webp", link: "#" },
