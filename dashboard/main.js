@@ -374,47 +374,81 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // js untuk data table
 
-$(document).ready(function() {
+
+
+document.addEventListener('DOMContentLoaded', function() {
     const rowsPerPage = 10;
     let currentPage = 1;
     let data = [];
     let filteredData = [];
 
     function renderTable(data, page = 1) {
-        const tableBody = $('#data-table tbody');
-        
-        
-        
-        tableBody.empty();
+        const tableBody = document.querySelector('#data-table tbody');
+        tableBody.innerHTML = '';
         const start = (page - 1) * rowsPerPage;
         const end = start + rowsPerPage;
         const paginatedData = data.slice(start, end);
-        
+
         paginatedData.forEach(row => {
-            const rowElement = $('<tr></tr>');
+            const rowElement = document.createElement('tr');
             for (let key in row) {
-                rowElement.append(`<td>${row[key]}</td>`);
+                const cell = document.createElement('td');
+                cell.textContent = row[key];
+                rowElement.appendChild(cell);
             }
-            tableBody.append(rowElement);
+            tableBody.appendChild(rowElement);
         });
     }
 
     function renderPagination(totalRows, rowsPerPage) {
-        const pagination = $('#pagination');
-        pagination.empty();
+        const pagination = document.getElementById('pagination');
+        pagination.innerHTML = '';
         const pageCount = Math.ceil(totalRows / rowsPerPage);
+        const maxButtons = 5;
+        let startPage = Math.max(currentPage - Math.floor(maxButtons / 2), 1);
+        let endPage = Math.min(startPage + maxButtons - 1, pageCount);
 
-        for (let i = 1; i <= pageCount; i++) {
-            const button = $('<span class="pagination-button"></span>').text(i);
+        if (endPage - startPage < maxButtons - 1) {
+            startPage = Math.max(endPage - maxButtons + 1, 1);
+        }
+
+        if (currentPage > 1) {
+            const prevButton = document.createElement('span');
+            prevButton.className = 'pagination-arrow';
+            prevButton.textContent = '«';
+            prevButton.addEventListener('click', function() {
+                currentPage = currentPage - 1;
+                renderTable(filteredData, currentPage);
+                renderPagination(filteredData.length, rowsPerPage);
+            });
+            pagination.appendChild(prevButton);
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+            const button = document.createElement('span');
+            button.className = 'pagination-button';
+            button.textContent = i;
             if (i === currentPage) {
-                button.addClass('active');
+                button.classList.add('active');
             }
-            button.on('click', function() {
+            button.addEventListener('click', function() {
                 currentPage = i;
                 renderTable(filteredData, currentPage);
                 renderPagination(filteredData.length, rowsPerPage);
             });
-            pagination.append(button);
+            pagination.appendChild(button);
+        }
+
+        if (currentPage < pageCount) {
+            const nextButton = document.createElement('span');
+            nextButton.className = 'pagination-arrow';
+            nextButton.textContent = '»';
+            nextButton.addEventListener('click', function() {
+                currentPage = currentPage + 1;
+                renderTable(filteredData, currentPage);
+                renderPagination(filteredData.length, rowsPerPage);
+            });
+            pagination.appendChild(nextButton);
         }
     }
 
@@ -426,42 +460,38 @@ $(document).ready(function() {
         });
     }
 
-    $.getJSON('dataset.json', function(response) {
-        data = response;
-        filteredData = data.map(item => ({ //ini untuk menampilkan data yang ingin muncul di dalam table
-            
-            BOROUGH:item.BOROUGH,
-            NEIGHBORHOOD:item.NEIGHBORHOOD,
-            BUILDING_CLASS_CATEGORY:item.BUILDING_CLASS_CATEGORY,
-            TOTAL_UNITS:item.TOTAL_UNITS,
-            YEAR_BUILT:item.YEAR_BUILT,
-            TAX_CLASS_AT_TIME_OF_SALE:item.TAX_CLASS_AT_TIME_OF_SALE,
-            SALE_PRICE:item.SALE_PRICE,
-            SALE_DATE:item.SALE_DATE
-        }))
-        
+    fetch('dataset.json')
+        .then(response => response.json())
+        .then(responseData => {
+            data = responseData;
+            filteredData = data.map(item => ({ 
+                BOROUGH: item.BOROUGH,
+                NEIGHBORHOOD: item.NEIGHBORHOOD,
+                BUILDING_CLASS_CATEGORY: item.BUILDING_CLASS_CATEGORY,
+                TOTAL_UNITS: item.TOTAL_UNITS,
+                YEAR_BUILT: item.YEAR_BUILT,
+                TAX_CLASS_AT_TIME_OF_SALE: item.TAX_CLASS_AT_TIME_OF_SALE,
+                SALE_PRICE: item.SALE_PRICE,
+                SALE_DATE: item.SALE_DATE
+            }));
+            renderTable(filteredData, currentPage);
+            renderPagination(filteredData.length, rowsPerPage);
+        });
 
-        renderTable(filteredData, currentPage);
-        renderPagination(filteredData.length, rowsPerPage);
-    });
-
-    $('#search').on('input', function() {
-        const searchTerm = $(this).val();
-        
-        filteredData = filterData(searchTerm).map(item => ({ //ini untuk menampilkan data yang ingin muncul di dalam table
-            
-            BOROUGH:item.BOROUGH,
-            NEIGHBORHOOD:item.NEIGHBORHOOD,
-            BUILDING_CLASS_CATEGORY:item.BUILDING_CLASS_CATEGORY,
-            TOTAL_UNITS:item.TOTAL_UNITS,
-            YEAR_BUILT:item.YEAR_BUILT,
-            TAX_CLASS_AT_TIME_OF_SALE:item.TAX_CLASS_AT_TIME_OF_SALE,
-            SALE_PRICE:item.SALE_PRICE,
-            SALE_DATE:item.SALE_DATE
+    document.getElementById('search').addEventListener('input', function() {
+        const searchTerm = this.value;
+        filteredData = filterData(searchTerm).map(item => ({
+            BOROUGH: item.BOROUGH,
+            NEIGHBORHOOD: item.NEIGHBORHOOD,
+            BUILDING_CLASS_CATEGORY: item.BUILDING_CLASS_CATEGORY,
+            TOTAL_UNITS: item.TOTAL_UNITS,
+            YEAR_BUILT: item.YEAR_BUILT,
+            TAX_CLASS_AT_TIME_OF_SALE: item.TAX_CLASS_AT_TIME_OF_SALE,
+            SALE_PRICE: item.SALE_PRICE,
+            SALE_DATE: item.SALE_DATE
         }));
         currentPage = 1;
         renderTable(filteredData, currentPage);
         renderPagination(filteredData.length, rowsPerPage);
     });
 });
-
