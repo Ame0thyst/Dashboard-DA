@@ -10,8 +10,12 @@
   align-items: center;
   justify-content: flex-start;
   overflow: hidden;
+  opacity: 0; /* Mulai dengan elemen tersembunyi */
+  transition: opacity 0.5s ease-in-out;
 }
-
+.home.loaded {
+  opacity: 1; /* Tampilkan elemen saat gambar sudah dimuat */
+}
 .home-content {
   max-width: 45%;
   color: white;
