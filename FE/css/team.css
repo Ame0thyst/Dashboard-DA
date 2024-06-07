@@ -144,12 +144,12 @@
 }
 
 .mentor-da {
-  background-color: red;
-  color: white;
+  background-color: rgb(218, 235, 67);
+  color: #1f1f1f;
 }
 .mentor-se {
-  background-color: rgb(231, 49, 171);
-  color: white;
+  background-color: rgb(245, 145, 211);
+  color: #1f1f1f;
 }
 
 .team-leader {
@@ -174,7 +174,7 @@
 
 .deployment {
   background-color: rgb(70, 223, 223);
-  color: white;
+  color: rgb(0, 0, 0);
 }
 .⭐ {
   color: rgb(228, 241, 106);

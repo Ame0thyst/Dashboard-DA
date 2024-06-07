@@ -7,7 +7,9 @@
   /* background: linear-gradient(to left, #080c0f, #33353a);  ini background gelap sebelumnya*/
   background-color: rgba(255, 255, 255, 0, 0);
 }
-
+#about h1 {
+  color: #1f1f1f;
+}
 #about h2 {
   text-align: left;
   text-transform: capitalize;
