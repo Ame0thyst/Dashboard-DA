@@ -102,11 +102,7 @@ nav li a:hover:before {
   transition: width 0.5s cubic-bezier((0.22, 0.61, 0.36, 1));
 }
 
-nav li a:hover:after {
-  background: transparent;
-  width: 100%;
-  /* transition: 0s; */
-}
+
 
 /* Sections */
 section {

@@ -11,7 +11,7 @@ body {
   background-size: cover;
   background-position: center;
   backdrop-filter: blur(30px);
-  padding: 50px 0 100px;
+  padding: 20px 0 90px;
   margin: 0;
 }
 
@@ -34,7 +34,7 @@ body {
   position: relative;
   margin-bottom: 15px;
   padding-bottom: 5px;
-  font-size: 16px;
+  font-size: 11px;
   border-bottom: 2px solid #eee;
   text-transform: uppercase;
 }
@@ -62,7 +62,7 @@ body {
 .kaurukaanibox .a-info strong {
   display: block;
   width: 100%;
-  padding: 4px 10px;
+  padding: 9px 10px;
   font-size: 14px;
   text-align: center;
   color: #fff;
@@ -89,11 +89,9 @@ body {
   content: ":";
   float: right;
   padding-right: 3px;
+  width: 60;
 }
-.kaurukaanibox .a-info .k-link a {
-  text-decoration: none;
-  color: rgb(93 79 230);
-}
+
 
 @media only screen and (max-width: 640px) {
   body {
@@ -110,7 +108,7 @@ body {
   .kaurukaanibox .a-info strong {
     font-size: 16px;
     border-radius: 6px;
-    font-weight: 600;
+    font-weight: 400;
   }
   .kaurukaanibox .a-info {
     padding: 0;
@@ -118,7 +116,7 @@ body {
     background: transparent;
   }
   .kaurukaanibox .a-info img {
-    max-width: 200px;
+    max-width: 100px;
     margin: auto;
   }
   .kaurukaanibox table {
@@ -128,4 +126,25 @@ body {
     padding: 15px !important;
     border-radius: 6px;
   }
+}
+
+.nav-header img {
+  max-width: 90px;
+  height: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+
+}
+img {
+  max-width: 90%;
+  max-height: 50;
+
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
