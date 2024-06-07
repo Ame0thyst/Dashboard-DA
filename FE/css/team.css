@@ -144,37 +144,37 @@
 }
 
 .mentor-da {
-  background-color: rgb(218, 235, 67);
-  color: #1f1f1f;
+  background-color: #580070;
+  color: #fafafa;
 }
 .mentor-se {
-  background-color: rgb(245, 145, 211);
-  color: #1f1f1f;
+  background-color: #0c00b8;
+  color: #fafafa;
 }
 
 .team-leader {
-  background-color: rgb(230, 41, 214);
+  background-color: #f261f5;
   color: #1f1f1f;
 }
 
 .front-end {
-  background-color: yellow;
-  color: black;
+  background-color: #f4ff57;
+  color: #0a0a0a;
 }
 
 .pitch-deck {
-  background-color: green;
-  color: white;
+  background-color: #137736;
+  color: #ffffff;
 }
 
 .quality-a {
-  background-color: orange;
-  color: black;
+  background-color: #aeaa37;
+  color: #0a0a0a;
 }
 
 .deployment {
-  background-color: rgb(70, 223, 223);
-  color: rgb(0, 0, 0);
+  background-color: #57fff4;
+  color: #0a0a0a;
 }
 .⭐ {
   color: rgb(228, 241, 106);
