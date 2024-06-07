@@ -36,7 +36,7 @@
   background: #70b3b1;
 }
 #about .container .card:nth-child(3) .box .icon .iconBox {
-  background: #d05fa2;
+  background: #eab3d3;
 }
 #about .card {
   background: #e9e7e7dc;
@@ -138,7 +138,7 @@
 }
 
 .marketing {
-  color: #e6e5e5;
+  color: #000000;
 }
 #about .container .card-inner .box .icon .iconBox span {
   color: #ffffffdc;
