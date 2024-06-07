@@ -374,8 +374,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // js untuk data table
 
-
-
 document.addEventListener('DOMContentLoaded', function() {
     const rowsPerPage = 10;
     let currentPage = 1;
