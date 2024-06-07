@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const roles = member.roles.map(role => `<span class="role-label ${role.toLowerCase().replace(' ', '-')}">${role}</span>`).join(", "); //ini beda dari yang aslinya
   
       card.innerHTML = `
-        <img src="${member.imageUrl}" alt="${member.name}">
+        <img src="${member.imageUrl}" alt="${member.name}" loading="lazy">
         <div class="team-card-info">
           <h3>${member.name}</h3>
           <span>${roles}</span>
