@@ -5,9 +5,9 @@ body {
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
-  background-color: rgb(240 240 240);
-  background-image: url(https://cdn.myanimelist.net/images/anime/1384/136408l.jpg);
-  background-repeat: no-repeat;
+  background-color: #f0f0f0;
+  background-image: url(/assets/NYC-01.webp);
+  background-repeat: repeat-x;
   background-size: cover;
   background-position: center;
   backdrop-filter: blur(30px);
@@ -92,7 +92,6 @@ body {
   width: 60;
 }
 
-
 @media only screen and (max-width: 640px) {
   body {
     padding: 50px 5px 100px;
@@ -134,17 +133,24 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: auto;
-
+}
+.nav-header img:hover {
+  background-color: #c5c6c7;
+  border-radius: 12px;
+}
+.nav-main {
+  margin-left: 5%;
+  display: flex;
+  flex-direction: row;
 }
 img {
   max-width: 90%;
   max-height: 50;
-
 }
 
 .logo-container {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }

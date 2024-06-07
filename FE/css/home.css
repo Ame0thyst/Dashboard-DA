@@ -50,6 +50,9 @@
   transition: transform 0.3s, box-shadow 0.3s;
   border-radius: 8px;
 }
+.bounce {
+  -webkit-animation: bounce 0.75s infinite;
+}
 
 .home button:hover {
   transform: scale(1.1);
@@ -101,5 +104,23 @@
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: left;
+  }
+}
+
+@-webkit-keyframes bounce {
+  0% {
+    transform: scale(1, 1) translate(0px, 0px);
+  }
+
+  30% {
+    transform: scale(1, 0.8) translate(0px, 10px);
+  }
+
+  75% {
+    transform: scale(1, 1.1) translate(0px, -15px);
+  }
+
+  100% {
+    transform: scale(1, 1) translate(0px, 0px);
   }
 }
