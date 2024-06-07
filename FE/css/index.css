@@ -24,7 +24,7 @@ h1 {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: rgba(107, 172, 247, 0.5); /* Ganti sesuai kebutuhan */
+  background: linear-gradient(35deg, #1f1f1f, #095f86); /* Ganti sesuai kebutuhan */
   z-index: 1000; /* Pastikan z-index nya lebih tinggi dari elemen lain jika diperlukan */
   padding: 10px 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Efek bayangan untuk memberi kesan mengambang */
@@ -170,7 +170,7 @@ section {
 footer {
   width: 97, 8%;
   /* background: linear-gradient(to left, #5ba8e2, #2c92d5); */
-  background-color: rgba(107, 172, 247, 0.5);
+  background: linear-gradient(35deg, #1f1f1f, #095f86);
   color: #fff;
   padding: 1rem;
   margin-bottom: 3px;
@@ -193,6 +193,9 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.col button{
+  margin-top: 10px;
 }
 
 #branch {
