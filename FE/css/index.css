@@ -194,6 +194,9 @@ footer {
   flex-direction: column;
   align-items: center;
 }
+.col button{
+  margin-top: 10px;
+}
 
 #branch {
   margin-top: 5%;

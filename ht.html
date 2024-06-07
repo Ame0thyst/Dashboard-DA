@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="./FE/css/home.css" />
   <link rel="stylesheet" href="./FE/css/team.css" />
   <link rel="stylesheet" href="./FE/css/about.css" />
-  <link rel="stylesheet" href="./FE/css/feedback.css" />
+  <link rel="stylesheet" href="./FeedBack/fb.css" />
   <link rel="stylesheet" href="./FE/css/dashboard.css" />
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
@@ -175,16 +175,41 @@
 
         <div class="col" id="desc">
           <h3>
-            Berita
+            FeedBack
             <div class="bottom_line"><span></span></div>
           </h3>
-          <form>
-            <ion-icon class="icon" name="mail"></ion-icon>
-            <input type="email" placeholder="Masukin dong emailnya" required />
-            <button type="submit">
-              <ion-icon class="icon_right" name="arrow-round-forward"></ion-icon>
-            </button>
-          </form>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+            data-whatever="Jayapura Team 10">Feedback Us🤗</button>
+
+          <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                  <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <form class="form-body">
+                    <div class="mb-3">
+                      <label for="recipient-name" class="col-form-label">For Us :</label>
+                      <input type="text" class="form-control" id="recipient-name" readonly>
+                    </div>
+                    <div class="mb-3">
+                      <label for="Email-name-sander" class="col-form-label">From :</label>
+                      <input type="email" class="form-control" id="Email-name-sander" placeholder="@example.com" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="message-text" class="col-form-label">Your Message:</label>
+                      <textarea class="form-control" id="message-text" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="social_icons">
             <a href="#">
               <ion-icon class="social_icon" name="logo-github"></ion-icon>
@@ -215,6 +240,7 @@
   <!-- script zone-->
   <script src="./FE/js/index.js"></script>
   <script src="./FE/js/team.js"></script>
+  <script src="/FeedBack/fb.js"></script>
 </body>
 
 </html>
