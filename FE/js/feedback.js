@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', function() {
+    const chatBubble = document.getElementById('chatBubble');
     const modal = document.getElementById('exampleModal');
     const openModalButtons = document.querySelectorAll('[data-toggle="modal"]');
     const closeModalButtons = modal.querySelectorAll('[data-dismiss="modal"]');
@@ -6,12 +7,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const recipientInput = modal.querySelector('#recipient-name');
     const form = document.querySelector('.form-body');
 
+    function showBubble() {
+        chatBubble.style.display = 'block';
+        setTimeout(() => {
+            chatBubble.style.display = 'none';
+        }, 2000);
+    }
+
+    setInterval(showBubble, 3000);
+
     openModalButtons.forEach(button => {
         button.addEventListener('click', () => {
             const recipient = button.getAttribute('data-whatever');
             modalTitle.textContent = ``;
             recipientInput.value = recipient;
-            modal.style.display = 'flex';
+            modal.classList.add('show');
 
             // Reset form values
             resetForm();
@@ -20,13 +30,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     closeModalButtons.forEach(button => {
         button.addEventListener('click', () => {
-            modal.style.display = 'none';
+            modal.classList.remove('show');
         });
     });
 
     modal.addEventListener('click', (event) => {
         if (event.target === modal) {
-            modal.style.display = 'none';
+            modal.classList.remove('show');
         }
     });
 
@@ -50,13 +60,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
         var message = document.getElementById('message-text').value;
 
         // Send email using EmailJS
-        emailjs.send("service_jpza6ra","template_yc4299p", {
+        emailjs.send("service_jpza6ra","template_yc4299p",{
             from_email: email,
             message: message
         }).then(function(response) {
             console.log("SUCCESS!", response.status, response.text);
-            alert("Thnaks for Ur Response! 💖");
-            modal.style.display = 'none'; // Close modal after successful submission
+            alert("Feedback sent successfully!");
+            modal.classList.remove('show'); // Close modal after successful submission
 
             // Reset form values
             resetForm();
@@ -68,21 +78,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // Function to reset form values manually
     function resetForm() {
-        // document.getElementById('recipient-name').value = '';
         document.getElementById('Email-name-sander').value = '';
         document.getElementById('message-text').value = '';
     }
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    const chatBubble = document.getElementById('chatBubble');
-
-    function showBubble() {
-        chatBubble.style.display = 'block';
-        setTimeout(() => {
-            chatBubble.style.display = 'none';
-        }, 2000);
-    }
-
-    setInterval(showBubble, 3000);
 });
