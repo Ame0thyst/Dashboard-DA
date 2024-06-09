@@ -11,10 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
         chatBubble.style.display = 'block';
         setTimeout(() => {
             chatBubble.style.display = 'none';
-        }, 2000);
+        }, 4000);
     }
 
-    setInterval(showBubble, 3000);
+    setInterval(showBubble, 2000);
 
     openModalButtons.forEach(button => {
         button.addEventListener('click', () => {

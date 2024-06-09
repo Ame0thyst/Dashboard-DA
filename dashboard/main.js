@@ -1,3 +1,8 @@
+/** 
+ * ! Jangan di SENTUH, berani nyentuh script nya tak tampol ntar 
+ * 
+*/
+ 
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -46,8 +51,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
                 
                 const data = sortedKeys.map(key => groupedData[key].TOTAL_UNITS);
-                
-                // Membuat chart menggunakan Chart.js
+
+
+                 //* MAIN CHART
                 window.lineChart = new Chart(lineChartCtx, {
                     type: 'line',
                     data: {
@@ -65,12 +71,16 @@ document.addEventListener('DOMContentLoaded', function () {
                             x: {
                                 title: {
                                     display: true,
-                                    text: 'SALE_DATE',
+                                    text: 'SALE DATE',
                                     color: '#333',
                                     font: {
                                         size: 16,
                                         weight: 'bold'
                                     }
+                                }, ticks:{
+                                    color:'#fff',
+                                    beginAtZero: true
+
                                 }
                             },
                             y: {
@@ -83,6 +93,10 @@ document.addEventListener('DOMContentLoaded', function () {
                                         size: 16,
                                         weight: 'bold'
                                     }
+                                }, ticks:{
+                                    color:'#fff',
+                                    beginAtZero: true
+
                                 }
                             }
                         }
@@ -90,10 +104,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
 
-                // Update Vertical Bar Chart
+                //* TOP 5 BOROUGH  BY SALE PRICE
                 
-
-                //vertical chart setelah optimasi
                 const boroughGroupedData = filteredData.reduce((acc, item) => {
                     const borough = item.BOROUGH;
                     if (!acc[borough]) {
@@ -164,18 +176,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
 
-                // Update Horizontal Bar Chart
+                 
+                //* TOP 5 NEIGHBORHOOD
                 const barChartHorizontalCtx = document.getElementById('bar-chart-horizontal').getContext('2d');
                 if (window.barChartHorizontal) {
                     window.barChartHorizontal.destroy();
                 }
+                const sortedData = filteredData.sort((a, b) => b.SALE_PRICE - a.SALE_PRICE);
+
                 window.barChartHorizontal = new Chart(barChartHorizontalCtx, {
                     type: 'bar',
                     data: {
-                        labels: filteredData.map(item => item.NEIGHBORHOOD).slice(0, 5),
+                        // labels: filteredData.map(item => item.NEIGHBORHOOD).slice(0, 5),
+                        labels: sortedData.map(item => item.NEIGHBORHOOD).slice(0, 5), // Menggunakan sortedData
                         datasets: [{
                             label: 'Top 5 Neighborhood',
-                            data: filteredData.map(item => item.SALE_PRICE).slice(0, 5),
+                            // data: filteredData.map(item => item.SALE_PRICE).slice(0, 5),
+                            data: sortedData.map(item => item.SALE_PRICE).slice(0, 5), // Menggunakan sortedData
                             backgroundColor: 'rgba(255, 99, 132, 0.2)',
                             borderColor: 'rgba(255, 99, 132, 1)',
                             borderWidth: 1
@@ -185,24 +202,89 @@ document.addEventListener('DOMContentLoaded', function () {
                         indexAxis: 'y',
                         scales: {
                             x: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                ticks: {
+                                    color: '#fff', // Warna putih untuk sumbu X
+                                    beginAtZero: true
+                                }
+                            },
+                            y: {
+                                ticks: {
+                                    color: '#fff' // Warna putih untuk sumbu Y
+                                }
                             }
                         }
                     }
                 });
 
-                // Update Horizontal Bar Chart 1
+
+                //* TOP 5 NEIGHBORHOOD
+                // const barChartHorizontal1Ctx = document.getElementById('bar-chart-horizontal-1').getContext('2d');
+                // if (window.barChartHorizontal1) {
+                //     window.barChartHorizontal1.destroy();
+                // }
+                // window.barChartHorizontal1 = new Chart(barChartHorizontal1Ctx, {
+                //     type: 'bar',
+                //     data: {
+                //         labels: filteredData.map(item => item.BUILDING_CLASS_CATEGORY).slice(0, 5),
+                //         datasets: [{
+                //             label: 'Top 5 Building Categories',
+                //             data: filteredData.map(item => item.SALE_PRICE).slice(0, 5),
+                //             backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                //             borderColor: 'rgba(54, 162, 235, 1)',
+                //             borderWidth: 1
+                //         }]
+                //     },
+                //     options: {
+                //         indexAxis: 'y',
+                //         scales: {
+                //             x: {
+                //                 beginAtZero: true,
+                //                 ticks: {
+                //                     color: '#fff' // Warna putih untuk sumbu Y
+                //                 }
+                //             },
+                //             y: {
+                //                 ticks: {
+                //                     color: '#fff' // Warna putih untuk sumbu Y
+                //                 }
+                //             }
+                //         }
+                //     }
+                // });
                 const barChartHorizontal1Ctx = document.getElementById('bar-chart-horizontal-1').getContext('2d');
                 if (window.barChartHorizontal1) {
                     window.barChartHorizontal1.destroy();
                 }
+
+                // Mengelompokkan data dan menghitung total SALE_PRICE untuk setiap kategori
+                let categoryTotals = {};
+                filteredData.forEach(item => {
+                    let category = item.BUILDING_CLASS_CATEGORY;
+                    let salePrice = parseFloat(item.SALE_PRICE);
+                    if (!categoryTotals[category]) {
+                        categoryTotals[category] = 0;
+                    }
+                    categoryTotals[category] += salePrice;
+                });
+
+                // Mengonversi objek ke array, mengurutkan berdasarkan total SALE_PRICE, dan mengambil 5 teratas
+                let topCategories = Object.keys(categoryTotals)
+                    .map(category => ({ category: category, total: categoryTotals[category] }))
+                    .sort((a, b) => b.total - a.total)
+                    .slice(0, 5);
+
+                // Menyiapkan data untuk chart
+                let categoryLabels = topCategories.map(item => item.category);
+                let categoryData = topCategories.map(item => item.total);
+
                 window.barChartHorizontal1 = new Chart(barChartHorizontal1Ctx, {
                     type: 'bar',
                     data: {
-                        labels: filteredData.map(item => item.BUILDING_CLASS_CATEGORY).slice(0, 5),
+                        labels: categoryLabels,
                         datasets: [{
                             label: 'Top 5 Building Categories',
-                            data: filteredData.map(item => item.SALE_PRICE).slice(0, 5),
+                            data: categoryData,
                             backgroundColor: 'rgba(54, 162, 235, 0.2)',
                             borderColor: 'rgba(54, 162, 235, 1)',
                             borderWidth: 1
@@ -212,11 +294,20 @@ document.addEventListener('DOMContentLoaded', function () {
                         indexAxis: 'y',
                         scales: {
                             x: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                ticks: {
+                                    color: '#fff' // Warna putih untuk sumbu X
+                                }
+                            },
+                            y: {
+                                ticks: {
+                                    color: '#fff' // Warna putih untuk sumbu Y
+                                }
                             }
                         }
                     }
                 });
+                        
 
                 // Update Horizontal Bar Chart 2
                 const barChartHorizontal2Ctx = document.getElementById('bar-chart-horizontal-2').getContext('2d');
@@ -312,33 +403,191 @@ document.addEventListener('DOMContentLoaded', function () {
                   });
 
                 // Update Line Chart 2
-                const lineChart2Ctx = document.getElementById('line-chart-2').getContext('2d');
-                if (window.lineChart2) {
-                    window.lineChart2.destroy();
+                
+            // let BoroughData = {};
+            // filteredData.forEach(item => {
+            //     let borough = item.BOROUGH;
+            //     let date = new Date(item.SALE_DATE);
+            //     let year = date.getFullYear();
+            //     let month = date.getMonth();
+            //     let quarter = Math.floor(month / 3) + 1; // Menentukan quarter dari bulan (1, 2, 3, atau 4)
+            //     let quarterKey = `${borough}-${year}-Q${quarter}`;
+            //     if (!BoroughData[quarterKey]) {
+            //         BoroughData[quarterKey] = {
+            //             count: 0,
+            //             totalSalePrice: 0
+            //         };
+            //     }
+            //     BoroughData[quarterKey].count++;
+            //     BoroughData[quarterKey].totalSalePrice += parseFloat(item.SALE_PRICE);
+            // });
+            
+
+
+            // // Menghitung rata-rata SALE_PRICE untuk setiap quarter dan borough
+            // let averageData = {};
+            // Object.keys(BoroughData).forEach(key => {
+            //     let borough = key.split('-')[0];
+            //     let year = key.split('-')[1];
+            //     let quarter = key.split('-')[2];
+            //     let quarterLabel = `Q${quarter} ${year}`;
+            //     if (!averageData[borough]) {
+            //         averageData[borough] = {
+            //             labels: [],
+            //             data: []
+            //         };
+            //     }
+            //     averageData[borough].labels.push(quarterLabel);
+            //     averageData[borough].data.push(BoroughData[key].totalSalePrice / BoroughData[key].count);
+            // });
+
+            // // Menyiapkan data untuk chart
+            // let datasets = [];
+            // Object.keys(averageData).forEach((borough, index) => {
+            //     datasets.push({
+            //         label: borough,
+            //         data: averageData[borough].data,
+            //         borderColor: getBrightColor(index), // Menggunakan warna yang lebih terang
+            //         backgroundColor: getBrightColor(index, 0.2), // Menggunakan warna yang lebih terang dengan opacity 0.2
+            //         tension: 0.1
+            //     });
+            // });
+
+            // // Fungsi untuk mendapatkan warna yang lebih terang
+            // function getBrightColor(index, alpha = 1) {
+            //     // Daftar warna yang lebih terang (dipilih secara manual)
+            //     const brightColors = [
+            //         'rgba(255, 99, 132, ' + alpha + ')',
+            //         'rgba(54, 162, 235, ' + alpha + ')',
+            //         'rgba(255, 205, 86, ' + alpha + ')',
+            //         'rgba(75, 192, 192, ' + alpha + ')',
+            //         'rgba(153, 102, 255, ' + alpha + ')'
+            //     ];
+            //     // Memastikan index berada dalam rentang yang valid
+            //     return brightColors[index % brightColors.length];
+            // }
+
+            // // Membuat line chart menggunakan Chart.js
+            // const lineChart2Ctx = document.getElementById('line-chart-2').getContext('2d');
+            // if (window.lineChart2) {
+            //     window.lineChart2.destroy();
+            // }
+            // window.lineChart2 = new Chart(lineChart2Ctx, {
+            //     type: 'line',
+            //     data: {
+            //         labels: averageData[Object.keys(averageData)[0]].labels, // Mengambil label dari salah satu borough (karena label sama untuk semua borough)
+            //         datasets: datasets
+            //     },
+            //     options: {
+            //         scales: {
+            //             y: {
+            //                 beginAtZero: true
+            //             }
+            //         }
+            //     }
+            // });
+            let boroughDataa = {};
+            filteredData.forEach(item => {
+                let borough = item.BOROUGH;
+                let date = new Date(item.SALE_DATE);
+                let year = date.getFullYear();
+                let month = date.getMonth();
+                let quarter = Math.floor(month / 3) + 1;
+                let quarterKey = `${borough}-${year}-Q${quarter}`;
+                if (!boroughDataa[quarterKey]) {
+                    boroughDataa[quarterKey] = {
+                        count: 0,
+                        totalSalePrice: 0
+                    };
                 }
-                window.lineChart2 = new Chart(lineChart2Ctx, {
-                    type: 'line',
-                    data: {
-                        labels: filteredData.map(item => item.BOROUGH),
-                        datasets: [{
-                            label: 'Price Classification by Borough',
-                            data: filteredData.map(item => item.SALE_PRICE),
-                            borderColor: 'rgba(153, 102, 255, 1)',
-                            backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                            tension: 0.1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                               
-                            }
-                        }
+                boroughDataa[quarterKey].count++;
+                boroughDataa[quarterKey].totalSalePrice += parseFloat(item.SALE_PRICE);
+            });
+
+            // Menghitung rata-rata SALE_PRICE untuk setiap quarter dan borough
+            let averageData = {};
+            Object.keys(boroughDataa).forEach(key => {
+                let borough = key.split('-')[0];
+                let year = key.split('-')[1];
+                let quarter = key.split('-')[2];
+                let quarterLabel = `Q${quarter} ${year}`;
+                if (!averageData[borough]) {
+                    averageData[borough] = {
+                        labels: [],
+                        data: []
+                    };
+                }
+                averageData[borough].labels.push(quarterLabel);
+                averageData[borough].data.push(boroughDataa[key].totalSalePrice / boroughDataa[key].count);
+            });
+
+            // Mengurutkan label berdasarkan tahun
+            Object.keys(averageData).forEach(borough => {
+                averageData[borough].labels.sort((a, b) => {
+                    // Parsing tahun dari label
+                    let yearA = parseInt(a.split(' ')[1]);
+                    let yearB = parseInt(b.split(' ')[1]);
+                    if (yearA !== yearB) {
+                        return yearA - yearB;
+                    } else {
+                        // Jika tahun sama, urutkan berdasarkan kuartal
+                        let quarterA = parseInt(a.split(' ')[0].substring(1));
+                        let quarterB = parseInt(b.split(' ')[0].substring(1));
+                        return quarterA - quarterB;
                     }
                 });
+            });
 
-                // Update Score Cards
+            // Menyiapkan data untuk chart
+            let datasets = [];
+            Object.keys(averageData).forEach((borough, index) => {
+                datasets.push({
+                    label: borough,
+                    data: averageData[borough].data,
+                    borderColor: getBrightColor(index), // Menggunakan warna yang lebih terang
+                    backgroundColor: getBrightColor(index, 0.2), // Menggunakan warna yang lebih terang dengan opacity 0.2
+                    tension: 0.1
+                });
+            });
+
+            // Fungsi untuk mendapatkan warna yang lebih terang
+            function getBrightColor(index, alpha = 1) {
+                // Daftar warna yang lebih terang (dipilih secara manual)
+                const brightColors = [
+                    'rgba(255, 99, 132, ' + alpha + ')',
+                    'rgba(54, 162, 235, ' + alpha + ')',
+                    'rgba(255, 205, 86, ' + alpha + ')',
+                    'rgba(75, 192, 192, ' + alpha + ')',
+                    'rgba(153, 102, 255, ' + alpha + ')'
+                ];
+                // Memastikan index berada dalam rentang yang valid
+                return brightColors[index % brightColors.length];
+            }
+
+            // Membuat line chart menggunakan Chart.js
+            const lineChart2Ctx = document.getElementById('line-chart-2').getContext('2d');
+            if (window.lineChart2) {
+                window.lineChart2.destroy();
+            }
+            window.lineChart2 = new Chart(lineChart2Ctx, {
+                type: 'line',
+                data: {
+                    labels: averageData[Object.keys(averageData)[0]].labels, // Mengambil label dari salah satu borough (karena label sama untuk semua borough)
+                    datasets: datasets
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            
+            
+
+         // Update Score Cards
                 // document.getElementById('total-revenue').innerText = `$${filteredData.reduce((acc, item) => acc + parseInt(item.SALE_PRICE), 0)}`;
                 document.getElementById('total-revenue').innerText = `${filteredData.reduce((acc, item) => acc + parseInt(item.SALE_PRICE), 0).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}`;
                 document.getElementById('total-block').innerText = filteredData.length;
