@@ -324,7 +324,7 @@ footer .copyright {
 .button-feedback {
   width: 50px;
   height: 50px;
-  background-color: #007bff;
+  background-color: #095f86;
   border: none;
   border-radius: 50%;
   color: white;
@@ -337,7 +337,7 @@ footer .copyright {
 }
 
 .chat-bubble {
-  background-color: #007bff;
+  background-color: #095f86;
   color: white;
   padding: 10px;
   border-radius: 10px;
@@ -357,7 +357,7 @@ footer .copyright {
   right: 10px;
   border-width: 10px;
   border-style: solid;
-  border-color: #007bff transparent transparent transparent;
+  border-color: #095f86 transparent transparent transparent;
 }
 
 .modal {
@@ -381,7 +381,7 @@ footer .copyright {
   opacity: 1;
 }
 
-.modal-dialog {
+/* .modal-dialog {
   max-width: 500px;
   margin: 1.75rem auto;
 }
@@ -469,7 +469,7 @@ footer .copyright {
 .mb-3 {
   margin-bottom: 1rem;
   text-align: left;
-}
+} */
 
 @media (max-width: 576px) {
   .modal-dialog {
