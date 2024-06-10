@@ -12,7 +12,26 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             dataset = data;
             let filteredData = dataset;
+            
+            //* function untuk angka tidak kebanyakan nol nya
+            function abbreviateNumber(value) {
+                // Jika nilai lebih dari atau sama dengan satu miliar
+                if (value >= 1e9) {
+                    return (value / 1e9).toFixed(1).replace(/\.0$/, '') + 'B';
+                }
+                // Jika nilai lebih dari atau sama dengan satu juta
+                if (value >= 1e6) {
+                    return (value / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
+                }
+                // Jika nilai lebih dari atau sama dengan satu ribu
+                if (value >= 1e3) {
+                    return (value / 1e3).toFixed(1).replace(/\.0$/, '') + 'K';
+                }
+                // Nilai kurang dari satu ribu
+                return value;
+            }
 
+            //* fungsi utuk responsive scatter plot
             // Update Charts Function
             function updateCharts() {
                 filteredData = filterData();
@@ -67,6 +86,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         }]
                     },
                     options: {
+                        responsive:true,
+                        maintainAspectRatio : false,
                         scales: {
                             x: {
                                 title: {
@@ -146,6 +167,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     /* styling warna judul chart */
                     
                     options: {
+                        responsive:true,
+                        maintainAspectRatio : false,
                         plugins: {
                             legend: {
                                 labels: {
@@ -159,9 +182,14 @@ document.addEventListener('DOMContentLoaded', function () {
                                 beginAtZero: true,
                                 ticks:{
                                     color:'#fff',
-                                    beginAtZero: true
-
+                                    beginAtZero: true,
+                                    
+                                callback: function(value, index, values) {
+                                    // Lakukan singkatan nilai di sini
+                                    return abbreviateNumber(value);
                                 }
+
+                                },
                             },
                             x: {
                             beginAtZero: true,
@@ -199,13 +227,19 @@ document.addEventListener('DOMContentLoaded', function () {
                         }]
                     },
                     options: {
+                        responsive:true,
+                        maintainAspectRatio : false,
                         indexAxis: 'y',
                         scales: {
                             x: {
                                 beginAtZero: true,
                                 ticks: {
                                     color: '#fff', // Warna putih untuk sumbu X
-                                    beginAtZero: true
+                                    beginAtZero: true,
+                                    callback: function(value, index, values) {
+                                        // Lakukan singkatan nilai di sini
+                                        return abbreviateNumber(value);
+                                    }
                                 }
                             },
                             y: {
@@ -218,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
 
-                //* TOP 5 NEIGHBORHOOD
+                //* TOP 5 BUILDING CATEGORY
                 // const barChartHorizontal1Ctx = document.getElementById('bar-chart-horizontal-1').getContext('2d');
                 // if (window.barChartHorizontal1) {
                 //     window.barChartHorizontal1.destroy();
@@ -296,7 +330,11 @@ document.addEventListener('DOMContentLoaded', function () {
                             x: {
                                 beginAtZero: true,
                                 ticks: {
-                                    color: '#fff' // Warna putih untuk sumbu X
+                                    color: '#fff', // Warna putih untuk sumbu X
+                                    callback: function(value, index, values) {
+                                        // Lakukan singkatan nilai di sini
+                                        return abbreviateNumber(value);
+                                    }
                                 }
                             },
                             y: {
@@ -309,33 +347,155 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
                         
 
-                // Update Horizontal Bar Chart 2
-                const barChartHorizontal2Ctx = document.getElementById('bar-chart-horizontal-2').getContext('2d');
-                if (window.barChartHorizontal2) {
-                    window.barChartHorizontal2.destroy();
+                //! bar chart lama
+                // const barChartHorizontal2Ctx = document.getElementById('bar-chart-horizontal-2').getContext('2d');
+                // if (window.barChartHorizontal2) {
+                //     window.barChartHorizontal2.destroy();
+                // }
+                // window.barChartHorizontal2 = new Chart(barChartHorizontal2Ctx, {
+                //     type: 'bar',
+                //     data: {
+                //         labels: filteredData.map(item => item.BUILDING_CLASS_AT_TIME_OF_SALE),
+                //         datasets: [{
+                //             label: 'Borough by Sale Price',
+                //             data: filteredData.map(item => item.SALE_PRICE),
+                //             backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                //             borderColor: 'rgba(75, 192, 192, 1)',
+                //             borderWidth: 1
+                //         }]
+                //     },
+                //     options: {
+                //         indexAxis: 'y',
+                //         scales: {
+                //             x: {
+                //                 beginAtZero: true
+                //             }
+                //         }
+                //     }
+                // });
+
+                //! scatter plot
+                const buildingClassData = filteredData.reduce((acc, item) => {
+                    const buildingClass = item.BUILDING_CLASS_AT_TIME_OF_SALE;
+                    if (!acc[buildingClass]) {
+                        acc[buildingClass] = {
+                            BUILDING_CLASS: buildingClass,
+                            TOTAL_UNITS: 0,
+                            TOTAL_SALE_PRICE: 0,
+                            TRANSACTION_COUNT: 0
+                        };
+                    }
+                    acc[buildingClass].TOTAL_UNITS += parseInt(item.TOTAL_UNITS, 10);
+                    acc[buildingClass].TOTAL_SALE_PRICE += parseInt(item.SALE_PRICE, 10);
+                    acc[buildingClass].TRANSACTION_COUNT += 1;
+                    return acc;
+                }, {});
+            
+                // Mengonversi objek menjadi array, kemudian mengurutkan dan memilih 5 transaksi tertinggi
+                const top5BuildingClasses = Object.values(buildingClassData)
+                    .sort((a, b) => b.TOTAL_SALE_PRICE - a.TOTAL_SALE_PRICE)
+                    .slice(0, 5);
+            
+                // Menghitung data untuk scatter plot
+                const scatterData = top5BuildingClasses.map(item => ({
+                    x: item.TOTAL_UNITS / item.TRANSACTION_COUNT,
+                    y: item.TOTAL_SALE_PRICE / item.TRANSACTION_COUNT,
+                    r: item.TRANSACTION_COUNT * 5, // Ukuran titik berdasarkan jumlah transaksi
+                    buildingClass: item.BUILDING_CLASS // Menyimpan informasi nama
+                }));
+            
+                const colors = [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ];
+            
+                const scatterChartCtx = document.getElementById('bar-chart-horizontal-2')?.getContext('2d');
+                if (!scatterChartCtx) {
+                    console.error('Element with id "bar-chart-horizontal-2" not found.');
+                    return;
                 }
-                window.barChartHorizontal2 = new Chart(barChartHorizontal2Ctx, {
-                    type: 'bar',
+                if (window.scatterChart) {
+                    window.scatterChart.destroy();
+                }
+                window.scatterChart = new Chart(scatterChartCtx, {
+                    type: 'bubble',
                     data: {
-                        labels: filteredData.map(item => item.BOROUGH),
-                        datasets: [{
-                            label: 'Borough by Sale Price',
-                            data: filteredData.map(item => item.SALE_PRICE),
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        }]
+                        datasets: scatterData.map((item, index) => ({
+                            label: item.buildingClass,
+                            data: [item],
+                            backgroundColor: colors[index % colors.length]
+                        }))
                     },
+            
                     options: {
-                        indexAxis: 'y',
+                        responsive : true,
+                        maintainAspectRatio : false,
+                       
                         scales: {
                             x: {
-                                beginAtZero: true
+                                title: {
+                                    display: true,
+                                    text: 'Average Total Units',
+                                    color: '#333',
+                                    font: {
+                                        size: 16,
+                                        weight: 'bold'
+                                    }
+                                },
+                                ticks: {
+                                    color: '#fff',
+                                    beginAtZero: true
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Average Sale Price',
+                                    color: '#333',
+                                    font: {
+                                        size: 16,
+                                        weight: 'bold'
+                                    }
+                                },
+                                ticks: {
+                                    color: '#fff',
+                                    beginAtZero: true,
+                                    callback: function(value, index, values) {
+                                        return abbreviateNumber(value);
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const label = context.dataset.label || '';
+                                        const x = context.raw.x.toFixed(2);
+                                        const y = context.raw.y.toFixed(2);
+                                        const r = context.raw.r;
+                                        return `${label}: (Avg Units: ${x}, Avg Price: ${y}, Transactions: ${r / 5})`;
+                                    }
+                                }
                             }
                         }
                     }
+                    
                 });
+                
+            
+            
+            
+            // Filter Data Function (Assuming you have a function that filters the data based on user inputs)
+            function filteredData() {
+                // Implement your data filtering logic here
+                return filterData;
+            }
 
+                //! pie chart
                 
                 const boroughCounts = filteredData.reduce((acc, curr) => {
                     const borough = curr.BOROUGH;
@@ -404,88 +564,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Update Line Chart 2
                 
-            // let BoroughData = {};
-            // filteredData.forEach(item => {
-            //     let borough = item.BOROUGH;
-            //     let date = new Date(item.SALE_DATE);
-            //     let year = date.getFullYear();
-            //     let month = date.getMonth();
-            //     let quarter = Math.floor(month / 3) + 1; // Menentukan quarter dari bulan (1, 2, 3, atau 4)
-            //     let quarterKey = `${borough}-${year}-Q${quarter}`;
-            //     if (!BoroughData[quarterKey]) {
-            //         BoroughData[quarterKey] = {
-            //             count: 0,
-            //             totalSalePrice: 0
-            //         };
-            //     }
-            //     BoroughData[quarterKey].count++;
-            //     BoroughData[quarterKey].totalSalePrice += parseFloat(item.SALE_PRICE);
-            // });
-            
-
-
-            // // Menghitung rata-rata SALE_PRICE untuk setiap quarter dan borough
-            // let averageData = {};
-            // Object.keys(BoroughData).forEach(key => {
-            //     let borough = key.split('-')[0];
-            //     let year = key.split('-')[1];
-            //     let quarter = key.split('-')[2];
-            //     let quarterLabel = `Q${quarter} ${year}`;
-            //     if (!averageData[borough]) {
-            //         averageData[borough] = {
-            //             labels: [],
-            //             data: []
-            //         };
-            //     }
-            //     averageData[borough].labels.push(quarterLabel);
-            //     averageData[borough].data.push(BoroughData[key].totalSalePrice / BoroughData[key].count);
-            // });
-
-            // // Menyiapkan data untuk chart
-            // let datasets = [];
-            // Object.keys(averageData).forEach((borough, index) => {
-            //     datasets.push({
-            //         label: borough,
-            //         data: averageData[borough].data,
-            //         borderColor: getBrightColor(index), // Menggunakan warna yang lebih terang
-            //         backgroundColor: getBrightColor(index, 0.2), // Menggunakan warna yang lebih terang dengan opacity 0.2
-            //         tension: 0.1
-            //     });
-            // });
-
-            // // Fungsi untuk mendapatkan warna yang lebih terang
-            // function getBrightColor(index, alpha = 1) {
-            //     // Daftar warna yang lebih terang (dipilih secara manual)
-            //     const brightColors = [
-            //         'rgba(255, 99, 132, ' + alpha + ')',
-            //         'rgba(54, 162, 235, ' + alpha + ')',
-            //         'rgba(255, 205, 86, ' + alpha + ')',
-            //         'rgba(75, 192, 192, ' + alpha + ')',
-            //         'rgba(153, 102, 255, ' + alpha + ')'
-            //     ];
-            //     // Memastikan index berada dalam rentang yang valid
-            //     return brightColors[index % brightColors.length];
-            // }
-
-            // // Membuat line chart menggunakan Chart.js
-            // const lineChart2Ctx = document.getElementById('line-chart-2').getContext('2d');
-            // if (window.lineChart2) {
-            //     window.lineChart2.destroy();
-            // }
-            // window.lineChart2 = new Chart(lineChart2Ctx, {
-            //     type: 'line',
-            //     data: {
-            //         labels: averageData[Object.keys(averageData)[0]].labels, // Mengambil label dari salah satu borough (karena label sama untuk semua borough)
-            //         datasets: datasets
-            //     },
-            //     options: {
-            //         scales: {
-            //             y: {
-            //                 beginAtZero: true
-            //             }
-            //         }
-            //     }
-            // });
+           
             let boroughDataa = {};
             filteredData.forEach(item => {
                 let borough = item.BOROUGH;
@@ -542,7 +621,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let datasets = [];
             Object.keys(averageData).forEach((borough, index) => {
                 datasets.push({
-                    label: borough,
+                    label:  `Borough ${borough}`,
                     data: averageData[borough].data,
                     borderColor: getBrightColor(index), // Menggunakan warna yang lebih terang
                     backgroundColor: getBrightColor(index, 0.2), // Menggunakan warna yang lebih terang dengan opacity 0.2
@@ -578,8 +657,32 @@ document.addEventListener('DOMContentLoaded', function () {
                 options: {
                     scales: {
                         y: {
-                            beginAtZero: true
-                        }
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'SUM OF Sale Price',
+                                color: '#fff',
+                                callback: function(value, index, values) {
+                                    // Lakukan singkatan nilai di sini
+                                    return abbreviateNumber(value);
+                                }
+                            },ticks: {
+                                color: '#fff',
+                                beginAtZero: true,
+                                callback: function(value, index, values) {
+                                    // Lakukan singkatan nilai di sini
+                                    return abbreviateNumber(value);
+                                }
+                            }
+                        },
+                        x: {
+                            beginAtZero: true,
+                                ticks:{
+                                    color:'#fff',
+                                    beginAtZero: true
+
+                                }
+                            }
                     }
                 }
             });

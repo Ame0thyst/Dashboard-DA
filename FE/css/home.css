@@ -3,7 +3,7 @@
   max-width: 100%;
   height: 60vh;
   margin-top: 50px;
-  background-image: url("/assets/NYC-01.webp"); /* Ganti dengan URL gambar  */
+  background-image: url("https://i.ibb.co.com/ccTfnrL/NYC-01after.webp"); /* Ganti dengan URL gambar  */
   background-size: cover;
   background-position: center;
   display: flex;

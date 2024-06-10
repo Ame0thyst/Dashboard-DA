@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', (event) => {
     const modal = document.getElementById('exampleModal');
     const openModalButtons = document.querySelectorAll('[data-toggle="modal"]');
@@ -82,3 +83,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
     setInterval(showBubble, 5000);
 });
+
