@@ -478,6 +478,31 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Implement your data filtering logic here
                 return filterData;
             }
+// Menghitung ukuran maksimum titik berdasarkan lebar layar
+const screenWidth = window.innerWidth;
+const maxPointSize = Math.min(20, screenWidth / 20); // Atur ukuran maksimum agar tidak terlalu besar
+
+const ScatterData = top5BuildingClasses.map(item => ({
+    x: item.TOTAL_UNITS / item.TRANSACTION_COUNT,
+    y: item.TOTAL_SALE_PRICE / item.TRANSACTION_COUNT,
+    r: Math.min(item.TRANSACTION_COUNT * 5, maxPointSize), // Batasi ukuran titik agar tidak terlalu besar
+    buildingClass: item.BUILDING_CLASS // Menyimpan informasi nama
+}));
+
+// ...
+
+// Membuat chart dengan data yang telah diupdate
+window.scatterChart = new Chart(scatterChartCtx, {
+    type: 'bubble',
+    data: {
+        datasets: ScatterData.map((item, index) => ({
+            label: item.buildingClass,
+            data: [item],
+            backgroundColor: colors[index % colors.length]
+        }))
+    },
+    // ...
+});
 
                 //! pie chart
                 
