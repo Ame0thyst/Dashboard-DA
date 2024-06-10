@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Nilai kurang dari satu ribu
                 return value;
             }
+
+            //* fungsi utuk responsive scatter plot
             // Update Charts Function
             function updateCharts() {
                 filteredData = filterData();
@@ -176,9 +178,14 @@ document.addEventListener('DOMContentLoaded', function () {
                                 beginAtZero: true,
                                 ticks:{
                                     color:'#fff',
-                                    beginAtZero: true
-
+                                    beginAtZero: true,
+                                    
+                                callback: function(value, index, values) {
+                                    // Lakukan singkatan nilai di sini
+                                    return abbreviateNumber(value);
                                 }
+
+                                },
                             },
                             x: {
                             beginAtZero: true,
@@ -416,7 +423,11 @@ document.addEventListener('DOMContentLoaded', function () {
                             backgroundColor: colors[index % colors.length]
                         }))
                     },
+            
                     options: {
+                        responsive : true,
+                        maintainAspectRatio : false,
+                       
                         scales: {
                             x: {
                                 title: {
@@ -447,7 +458,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                     color: '#fff',
                                     beginAtZero: true,
                                     callback: function(value, index, values) {
-                                        // Lakukan singkatan nilai di sini
                                         return abbreviateNumber(value);
                                     }
                                 }
@@ -478,31 +488,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Implement your data filtering logic here
                 return filterData;
             }
-// Menghitung ukuran maksimum titik berdasarkan lebar layar
-const screenWidth = window.innerWidth;
-const maxPointSize = Math.min(20, screenWidth / 20); // Atur ukuran maksimum agar tidak terlalu besar
-
-const ScatterData = top5BuildingClasses.map(item => ({
-    x: item.TOTAL_UNITS / item.TRANSACTION_COUNT,
-    y: item.TOTAL_SALE_PRICE / item.TRANSACTION_COUNT,
-    r: Math.min(item.TRANSACTION_COUNT * 5, maxPointSize), // Batasi ukuran titik agar tidak terlalu besar
-    buildingClass: item.BUILDING_CLASS // Menyimpan informasi nama
-}));
-
-// ...
-
-// Membuat chart dengan data yang telah diupdate
-window.scatterChart = new Chart(scatterChartCtx, {
-    type: 'bubble',
-    data: {
-        datasets: ScatterData.map((item, index) => ({
-            label: item.buildingClass,
-            data: [item],
-            backgroundColor: colors[index % colors.length]
-        }))
-    },
-    // ...
-});
 
                 //! pie chart
                 
@@ -670,7 +655,14 @@ window.scatterChart = new Chart(scatterChartCtx, {
                             title: {
                                 display: true,
                                 text: 'SUM OF Sale Price',
-                                color: '#FFFFFF',
+                                color: '#fff',
+                                callback: function(value, index, values) {
+                                    // Lakukan singkatan nilai di sini
+                                    return abbreviateNumber(value);
+                                }
+                            },ticks: {
+                                color: '#fff',
+                                beginAtZero: true,
                                 callback: function(value, index, values) {
                                     // Lakukan singkatan nilai di sini
                                     return abbreviateNumber(value);

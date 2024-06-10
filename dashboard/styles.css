@@ -205,25 +205,30 @@ th {
 
 @media (max-width: 768px) {
   .row {
-    flex-direction: column; /* Mengubah orientasi flex menjadi vertikal */
+    flex-direction: column;
   }
   .chart-container {
-    max-width: 100%; /* Menyesuaikan lebar chart container agar penuh pada layar kecil */
-    margin-bottom: 20px; /* Memberikan jarak antar chart pada layar kecil */
+    max-width: 100%;
+    margin-bottom: 20px;
   }
 }
 @media (max-width: 768px) {
-  /* Mengatur tata letak tabel menjadi blok sehingga dapat di-scroll */
   table {
     display: block;
     overflow-x: auto;
-    white-space: nowrap; /* Menghindari pembungkus teks */
+    white-space: nowrap;
   }
 
-  /* Mengatur lebar kolom tabel agar tetap sesuai dengan konten */
   th,
   td {
-    min-width: 100px; /* Mengatur lebar minimal kolom */
-    max-width: none; /* Menghapus batasan lebar maksimal */
+    min-width: 100px;
+    max-width: none;
+  }
+}
+@media (max-width: 768px) {
+  #scatter-container {
+    width: 100%;
+    height: 400px;
+    padding: 0;
   }
 }
