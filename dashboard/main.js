@@ -668,7 +668,15 @@ document.addEventListener('DOMContentLoaded', function () {
                                     return abbreviateNumber(value);
                                 }
                             }
-                        }
+                        },
+                        x: {
+                            beginAtZero: true,
+                                ticks:{
+                                    color:'#fff',
+                                    beginAtZero: true
+
+                                }
+                            }
                     }
                 }
             });
