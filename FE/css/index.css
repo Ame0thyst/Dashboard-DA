@@ -337,7 +337,7 @@ footer .copyright {
 }
 
 .chat-bubble {
-  background-color: #007bff;
+  background-color: #00458f;
   color: white;
   padding: 10px;
   border-radius: 10px;
@@ -357,7 +357,7 @@ footer .copyright {
   right: 10px;
   border-width: 10px;
   border-style: solid;
-  border-color: #007bff transparent transparent transparent;
+  border-color: #00458f transparent transparent transparent;
 }
 
 .modal {

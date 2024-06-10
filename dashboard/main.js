@@ -86,6 +86,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         }]
                     },
                     options: {
+                        responsive:true,
+                        maintainAspectRatio : false,
                         scales: {
                             x: {
                                 title: {
@@ -165,6 +167,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     /* styling warna judul chart */
                     
                     options: {
+                        responsive:true,
+                        maintainAspectRatio : false,
                         plugins: {
                             legend: {
                                 labels: {
@@ -223,6 +227,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         }]
                     },
                     options: {
+                        responsive:true,
+                        maintainAspectRatio : false,
                         indexAxis: 'y',
                         scales: {
                             x: {
