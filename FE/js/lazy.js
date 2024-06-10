@@ -4,7 +4,7 @@
   
     // Membuat elemen gambar baru untuk memuat gambar
     const img = new Image();
-    img.src = '/assets/NYC-01after.webp'; // Ganti dengan URL gambar Anda
+    img.src = 'https://i.ibb.co.com/ccTfnrL/NYC-01after.webp'; // Ganti dengan URL gambar Anda
     img.onload = () => {
         // Setelah gambar dimuat, atur background-image dan tambahkan kelas 'loaded'
         homeSection.style.backgroundImage = `url('${img.src}')`;
