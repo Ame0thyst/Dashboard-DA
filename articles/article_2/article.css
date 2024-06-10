@@ -1,16 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
 body {
   font-family: "Inter", sans-serif;
   display: flex;
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
-  background-color: #f0f0f0;
-  background-image: url(/assets/NYC-01.webp);
-  background-repeat: repeat-x;
+
+  background-color: rgb(240, 240, 240);
+  background-image: url(https://cdn.myanimelist.net/images/anime/1384/136408l.jpg);
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  backdrop-filter: blur(30px);
+  backdrop-filter: blur(90px);
   padding: 20px 0 90px;
   margin: 0;
 }
@@ -19,7 +21,7 @@ body {
   display: flex;
   gap: 20px;
   margin: auto;
-  max-width: 800px;
+  max-width: 900px;
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
@@ -52,7 +54,7 @@ body {
   z-index: 1;
   display: flex;
   padding: 10px 15px 15px;
-  max-width: 250px;
+  max-width: 300px;
   background: rgb(131 131 131 / 10%);
   flex-wrap: wrap;
   gap: 15px;
@@ -71,26 +73,32 @@ body {
 .kaurukaanibox .a-info img {
   width: 100%;
 }
-.kaurukaanibox table,
-.kaurukaanibox table td,
-.kaurukaanibox table th,
-.kaurukaanibox table tr {
-  border: 0 !important;
-  padding: 0 !important;
-  font-size: 12px;
-  line-height: 22px;
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
 }
-.kaurukaanibox table tr th {
-  width: 90px;
+
+th, td {
+  padding: 8px;
   text-align: left;
-  vertical-align: top;
 }
-.kaurukaanibox table tr th::after {
-  content: ":";
-  float: right;
-  padding-right: 3px;
-  width: 60;
+
+
+th {
+  color: #333;
+  font-weight: bold;
+  position: relative; /* Position the `<th>` cells relatively */
+  vertical-align: top; /* Align the `<th>` text vertically with the top edge */
+  white-space: wrap; /* Prevent word wrapping in `<th>` cells */
 }
+td {
+  padding: 8px;
+  text-align: left;
+  max-width: 200px; /* Ubah nilai ini sesuai kebutuhan */
+}
+
 
 @media only screen and (max-width: 640px) {
   body {

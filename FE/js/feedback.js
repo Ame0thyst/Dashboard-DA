@@ -1,84 +1,67 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     const chatBubble = document.getElementById('chatBubble');
     const modal = document.getElementById('exampleModal');
     const openModalButtons = document.querySelectorAll('[data-toggle="modal"]');
     const closeModalButtons = modal.querySelectorAll('[data-dismiss="modal"]');
     const modalTitle = modal.querySelector('.modal-title');
-    const recipientInput = modal.querySelector('#recipient-name');
     const form = document.querySelector('.form-body');
 
-    function showBubble() {
+    const showBubble = () => {
         chatBubble.style.display = 'block';
-        setTimeout(() => {
-            chatBubble.style.display = 'none';
-        }, 4000);
-    }
-
-    setInterval(showBubble, 2000);
-
-    openModalButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const recipient = button.getAttribute('data-whatever');
-            modalTitle.textContent = ``;
-            recipientInput.value = recipient;
-            modal.classList.add('show');
-
-            // Reset form values
-            resetForm();
-        });
-    });
-
-    closeModalButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            modal.classList.remove('show');
-        });
-    });
-
-    modal.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            modal.classList.remove('show');
-        }
-    });
-
-    // Load EmailJS SDK
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
-    script.onload = function() {
-        emailjs.init({
-            publicKey: "7HJFP3xUcoiIdz-IA"
-        });
+        setTimeout(() => chatBubble.style.display = 'none', 4000);
     };
-    document.head.appendChild(script);
 
-    // Handle form submission
-    form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission
+    const resetForm = () => {
+        document.getElementById('Email-name-sander').value = '';
+        document.getElementById('message-text').value = '';
+    };
 
-        // Get form data
-        var email = document.getElementById('Email-name-sander').value;
-        var message = document.getElementById('message-text').value;
+    const openModal = (event) => {
+        modalTitle.textContent = '';
+        modal.classList.add('show');
+        resetForm();
+    };
 
-        // Send email using EmailJS
-        emailjs.send("service_jpza6ra","template_yc4299p",{
+    const closeModal = () => {
+        modal.classList.remove('show');
+    };
+
+    const handleModalClick = (event) => {
+        if (event.target === modal) closeModal();
+    };
+
+    const loadEmailJS = () => {
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+        script.onload = () => emailjs.init({ publicKey: "JFk9plcnI_oABgDas" });
+        document.head.appendChild(script);
+    };
+
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
+        const email = document.getElementById('Email-name-sander').value;
+        const message = document.getElementById('message-text').value;
+
+        emailjs.send("service_58d0z1h", "template_m1c5p2c", {
             from_email: email,
-            message: message
-        }).then(function(response) {
+            message: message,
+        }).then(response => {
             console.log("SUCCESS!", response.status, response.text);
             alert("Feedback sent successfully!");
-            modal.classList.remove('show'); // Close modal after successful submission
-
-            // Reset form values
+            closeModal();
             resetForm();
-        }, function(error) {
+        }, error => {
             console.log("FAILED...", error);
             alert("Failed to send feedback. Please try again.");
         });
-    });
+    };
 
-    // Function to reset form values manually
-    function resetForm() {
-        document.getElementById('Email-name-sander').value = '';
-        document.getElementById('message-text').value = '';
-    }
+    setInterval(showBubble, 4000);
+    openModalButtons.forEach(button => button.addEventListener('click', openModal));
+    closeModalButtons.forEach(button => button.addEventListener('click', closeModal));
+    modal.addEventListener('click', handleModalClick);
+    form.addEventListener('submit', handleFormSubmit);
+
+    loadEmailJS();
 });
