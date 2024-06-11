@@ -2,7 +2,34 @@
  * ! Jangan di SENTUH, berani nyentuh script nya tak tampol ntar 
  * 
 */
- 
+var select = document.getElementById("category");
+
+// Lakukan request AJAX untuk mengambil dataset JSON
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "dataset.json", true);
+xhr.onreadystatechange = function () {
+  if (xhr.readyState === 4 && xhr.status === 200) {
+    // Parsing JSON
+    var data = JSON.parse(xhr.responseText);
+
+    // Ambil semua nilai kategori BUILDING_CLASS_CATEGORY
+    var buildingCategories = data.map(function(item) {
+      return item.BUILDING_CLASS_CATEGORY;
+    });
+
+    // Hapus nilai duplikat
+    buildingCategories = [...new Set(buildingCategories)];
+
+    // Tambahkan opsi dari dataset JSON ke elemen select
+    buildingCategories.forEach(function(category) {
+      var option = document.createElement("option");
+      option.text = category;
+      option.value = category;
+      select.appendChild(option);
+    });
+  }
+};
+xhr.send();
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -253,39 +280,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
                 //* TOP 5 BUILDING CATEGORY
-                // const barChartHorizontal1Ctx = document.getElementById('bar-chart-horizontal-1').getContext('2d');
-                // if (window.barChartHorizontal1) {
-                //     window.barChartHorizontal1.destroy();
-                // }
-                // window.barChartHorizontal1 = new Chart(barChartHorizontal1Ctx, {
-                //     type: 'bar',
-                //     data: {
-                //         labels: filteredData.map(item => item.BUILDING_CLASS_CATEGORY).slice(0, 5),
-                //         datasets: [{
-                //             label: 'Top 5 Building Categories',
-                //             data: filteredData.map(item => item.SALE_PRICE).slice(0, 5),
-                //             backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                //             borderColor: 'rgba(54, 162, 235, 1)',
-                //             borderWidth: 1
-                //         }]
-                //     },
-                //     options: {
-                //         indexAxis: 'y',
-                //         scales: {
-                //             x: {
-                //                 beginAtZero: true,
-                //                 ticks: {
-                //                     color: '#fff' // Warna putih untuk sumbu Y
-                //                 }
-                //             },
-                //             y: {
-                //                 ticks: {
-                //                     color: '#fff' // Warna putih untuk sumbu Y
-                //                 }
-                //             }
-                //         }
-                //     }
-                // });
+                
                 const barChartHorizontal1Ctx = document.getElementById('bar-chart-horizontal-1').getContext('2d');
                 if (window.barChartHorizontal1) {
                     window.barChartHorizontal1.destroy();
@@ -348,31 +343,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         
 
                 //! bar chart lama
-                // const barChartHorizontal2Ctx = document.getElementById('bar-chart-horizontal-2').getContext('2d');
-                // if (window.barChartHorizontal2) {
-                //     window.barChartHorizontal2.destroy();
-                // }
-                // window.barChartHorizontal2 = new Chart(barChartHorizontal2Ctx, {
-                //     type: 'bar',
-                //     data: {
-                //         labels: filteredData.map(item => item.BUILDING_CLASS_AT_TIME_OF_SALE),
-                //         datasets: [{
-                //             label: 'Borough by Sale Price',
-                //             data: filteredData.map(item => item.SALE_PRICE),
-                //             backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                //             borderColor: 'rgba(75, 192, 192, 1)',
-                //             borderWidth: 1
-                //         }]
-                //     },
-                //     options: {
-                //         indexAxis: 'y',
-                //         scales: {
-                //             x: {
-                //                 beginAtZero: true
-                //             }
-                //         }
-                //     }
-                // });
+                
 
                 //! scatter plot
                 const buildingClassData = filteredData.reduce((acc, item) => {
